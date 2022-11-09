@@ -1,6 +1,7 @@
 # <========== import ==========>
 
 from __future__ import annotations
+from math import sqrt
 
 # <========== class ==========>
 
@@ -17,7 +18,8 @@ class Lvl:
     def exp(self: Lvl) -> int: return self.__exp
     
     @property
-    def lvl(self: Lvl) -> float: return ((self.__exp * 15) / (self.exp * 32))
+    def lvl(self: Lvl) -> int:
+        return (int((sqrt(self.exp) * 0.57 * 137 + 3 * self.exp * 2.85) / 1000)) + 1
     # <----- setter ----->
     
     @exp.setter
@@ -59,6 +61,6 @@ class Lvl:
         if type(other) == Lvl: return self.__exp >= other
         self.__exp >= other.__exp
         
-if __name__ == "__main__":
-    l: Lvl = Lvl(1)
-    print(l.lvl)
+    # <----- str ----->
+    
+    def __str__(self) -> str: return f"lvl {self.lvl} avec {self.__exp} exp."
